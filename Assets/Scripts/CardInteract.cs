@@ -23,8 +23,6 @@ public class CardInteract : MonoBehaviour {
         float planeDist;
         dragPlane.Raycast(camRay, out planeDist); 
         offset = transform.position - camRay.GetPoint(planeDist);
-
-        Debug.Log("OnMouseDown");
     }
 
     void OnMouseUpAsButton()
@@ -38,12 +36,12 @@ public class CardInteract : MonoBehaviour {
             .AppendCallback(() => ComboSpawner.instance.Spawn());
     }
 
-    void OnMouseDrag()
-    {   
-        Debug.Log("OnMouseDrag");
-        Ray camRay = myMainCamera.ScreenPointToRay(Input.mousePosition); 
-        float planeDist;
-        dragPlane.Raycast(camRay, out planeDist);
-        transform.position = camRay.GetPoint(planeDist) + offset;
-    }
+    // void OnMouseDrag()
+    // {   
+    //     Debug.Log("OnMouseDrag");
+    //     Ray camRay = myMainCamera.ScreenPointToRay(Input.mousePosition); 
+    //     float planeDist;
+    //     dragPlane.Raycast(camRay, out planeDist);
+    //     transform.position = camRay.GetPoint(planeDist) + offset;
+    // }
 }
