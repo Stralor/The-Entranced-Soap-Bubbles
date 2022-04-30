@@ -32,8 +32,9 @@ public class CardStack : MonoBehaviour
 
     public void AddCard (Vector3 cardPosition) 
     {
+        int cardTypeIndex = Random.Range(0, cardTypes.Count -1);
         Image cardInstance = Instantiate(card, cardPosition, Quaternion.identity, canvas.transform) as Image;
-        cardInstance.GetComponent<CardType>().Type = cardTypes[0];
+        cardInstance.GetComponent<CardType>().Type = cardTypes[cardTypeIndex];
         Stack.Add(cardInstance);
     }
 
