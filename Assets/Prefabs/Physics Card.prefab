@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3881037989894281239}
   - component: {fileID: 7329790472013518172}
   - component: {fileID: 5322348560087675997}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Physics Card
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6110287749881583616}
   - component: {fileID: 6110287749881583617}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Art (Back)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6110287750512268097}
   - component: {fileID: 6110287750512268099}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Art (Face)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
