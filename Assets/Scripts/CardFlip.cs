@@ -25,6 +25,11 @@ public class CardFlip : MonoBehaviour
     
     public Sequence Flip()
     {
+        if (flipSequence != null && flipSequence.IsPlaying())
+        {
+            return flipSequence;
+        }
+        
         return DOTween.Sequence()
             .Append(transform.DOLocalRotate(new Vector3(0, 180, 0), duration)
                 .SetEase(Ease.InOutBack))
@@ -42,11 +47,11 @@ public class CardFlip : MonoBehaviour
         flipSequence?.Play();
     }
 
-    public void Stop()
+    public Tween Stop()
     {
         flipSequence?.Kill();
 
-        transform.DORotate(new Vector3(0, 0, 0), 0.3f)
+        return transform.DORotate(new Vector3(0, 0, 0), 0.3f)
             .SetEase(Ease.OutBounce);
     }
 }

@@ -8,7 +8,13 @@ public class CardReset : MonoBehaviour
     {
         if (transform.position.y < -70) 
         {
-            transform.position = new Vector3(transform.position.x,  70, 0);
+            Reset();
         }
+    }
+
+    public void Reset()
+    {
+        transform.position = new Vector3(transform.position.x,  70, 0);
+        GetComponentInChildren<CardFlip>().Flip();
     }
 }
