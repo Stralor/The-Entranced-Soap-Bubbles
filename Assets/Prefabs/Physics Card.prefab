@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6110287749615650647}
   - component: {fileID: 3881037989894281239}
   - component: {fileID: 7329790472013518172}
+  - component: {fileID: 5322348560087675997}
   m_Layer: 0
   m_Name: Physics Card
   m_TagString: Untagged
@@ -92,6 +93,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b749ea33e988088e78c83ba5542ae5f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5322348560087675997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6110287749615650646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d80558cfdcd820d29a49393086ef119, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6110287749881584639
