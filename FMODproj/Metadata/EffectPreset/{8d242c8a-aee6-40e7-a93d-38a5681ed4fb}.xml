@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EffectPreset" id="{8d242c8a-aee6-40e7-a93d-38a5681ed4fb}">
+		<property name="name">
+			<value>Pitch Shifter</value>
+		</property>
+		<relationship name="folder">
+			<destination>{9c4c30fb-b863-4cf6-b55b-580d9c31eea2}</destination>
+		</relationship>
+		<relationship name="effect">
+			<destination>{44f5582d-21be-4901-88e3-d67ffaad0926}</destination>
+		</relationship>
+	</object>
+	<object class="PitchShifterEffect" id="{44f5582d-21be-4901-88e3-d67ffaad0926}" />
+</objects>
