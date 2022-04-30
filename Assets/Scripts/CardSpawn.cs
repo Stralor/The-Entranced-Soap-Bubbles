@@ -9,7 +9,13 @@ public class CardSpawn : MonoBehaviour
     GameObject CardPrefab;
 
     [SerializeField]
-    List<Sprite> sprites;
+    List<Sprite> cards;
+
+    [SerializeField]
+    int MinScore = -1;
+
+    [SerializeField]
+    int MaxScore = 10;
 
     [SerializeField]
     int InitialAmount = 10;
@@ -45,17 +51,17 @@ public class CardSpawn : MonoBehaviour
 
     public void AddCard (bool IsSpawnedInView = false) 
     {
-        if (sprites.Count == 0) 
+        if (cards.Count == 0) 
         {
             Debug.Log("No card texture added.");
             return;
         }
 
         // Pick random card
-        int cardIndex = Random.Range(0, sprites.Count - 1);
+        int cardIndex = Random.Range(0, cards.Count - 1);
         if (cardIndex < 0) return;
 
-        var cardSprite = sprites[cardIndex];
+        Sprite cardSprite = cards[cardIndex];
 
         // Spawn inside / outside viewport
         float randomX = Random.Range(-100f, 100f);
@@ -63,7 +69,10 @@ public class CardSpawn : MonoBehaviour
 
         // Spawn
         GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
-        card.name = cardSprite.name;
+
+        // Meta
+        card.GetComponent<CardMeta>().Name = cardSprite.name;
+        card.GetComponent<CardMeta>().ScoreValue = Random.Range(MinScore, MaxScore);
         
         // Apply texture
         card.GetComponentInChildren<SpriteRenderer>().sprite = cardSprite;
