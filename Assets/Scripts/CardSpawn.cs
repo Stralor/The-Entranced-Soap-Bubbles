@@ -63,6 +63,7 @@ public class CardSpawn : MonoBehaviour
 
         // Spawn
         GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
+        card.name = cardSprite.name;
         
         // Apply texture
         card.GetComponentInChildren<SpriteRenderer>().sprite = cardSprite;

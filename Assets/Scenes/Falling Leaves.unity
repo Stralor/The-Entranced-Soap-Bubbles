@@ -240,8 +240,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8303ec78f1e8584828a1c73b125f2484, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CardPrefabs:
-  - {fileID: 6110287749615650646, guid: d8a7ac0681c91924aa4395498d19fd47, type: 3}
+  CardPrefab: {fileID: 6110287749615650646, guid: d8a7ac0681c91924aa4395498d19fd47, type: 3}
+  sprites:
+  - {fileID: 21300000, guid: 4e082a1f9496bb3428caa16c9950a984, type: 3}
+  - {fileID: 21300000, guid: a37ee188fcfd6944a92244109b08d883, type: 3}
+  - {fileID: 21300000, guid: a4293ba5e19ebb749b71ff28facf716e, type: 3}
   InitialAmount: 10
   MaxAmount: 50
   Interval: 1
