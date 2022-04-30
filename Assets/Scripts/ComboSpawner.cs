@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DG.Tweening;
 
 public class ComboSpawner : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class ComboSpawner : MonoBehaviour
     public List<GameObject> comboCards = new List<GameObject>();
 
     private List<GameObject> comboCardPool = new List<GameObject>();
+    
+    private static float claimDuration = 0.3f;
     
     public void Spawn()
     {
@@ -48,15 +51,24 @@ public class ComboSpawner : MonoBehaviour
         return card;
     }
 
-    public Vector3 GetWorldPositionOfLastComboCard()
+    public Tween SendCardToLastOfCombo(Transform t)
     {
         if (comboCards.Count == 0)
         {
-            return transform.position;
+             return DOTween.Sequence()
+                 .Append(t.DOLocalMove(Vector3.up, claimDuration))
+                 .Insert(0, t.DOScale(Vector3.zero, claimDuration));
         }
 
         var rect = comboCards.Last().GetComponent<RectTransform>();
-        return rect.position;
+        Vector3[] corners = new Vector3[4];
+        rect.GetWorldCorners(corners);
+        var averageX = corners.Select(val => val.x).Average();
+        var averageY = corners.Select(val => val.y).Average();
+        var averageZ = corners.Select(val => val.z).Average();
+        var average = new Vector3(averageX, averageY, averageZ);
+
+        return t.DOMove(average, claimDuration);
     }
     
     void Awake()

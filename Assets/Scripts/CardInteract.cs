@@ -10,8 +10,6 @@ public class CardInteract : MonoBehaviour {
 
     private Camera myMainCamera;
 
-    private static float claimDuration = 0.3f;
-
     void Start()
     {
         myMainCamera = Camera.main; 
@@ -31,15 +29,11 @@ public class CardInteract : MonoBehaviour {
 
     void OnMouseUpAsButton()
     {
-        var destiny = ComboSpawner.instance.GetWorldPositionOfLastComboCard();
+        var sendTween = ComboSpawner.instance.SendCardToLastOfCombo(transform);
         
         DOTween.Sequence()
             .Append(GetComponentInChildren<CardFlip>().Stop())
-            .Append(DOTween.To(
-                () => transform.position,
-                x => transform.position = x,
-                destiny,
-                claimDuration))
+            .Append(sendTween)
             .AppendCallback(() => GetComponent<CardReset>().Reset())
             .AppendCallback(() => ComboSpawner.instance.Spawn());
     }
