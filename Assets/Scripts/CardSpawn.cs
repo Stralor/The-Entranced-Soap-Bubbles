@@ -71,9 +71,13 @@ public class CardSpawn : MonoBehaviour
         GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
 
         // Meta
+        int value = Random.Range(MinScore, MaxScore);
         card.GetComponent<CardMeta>().Name = cardSprite.name;
-        card.GetComponent<CardMeta>().ScoreValue = Random.Range(MinScore, MaxScore);
+        card.GetComponent<CardMeta>().ScoreValue = value;
         
+        // Display text on card
+        card.GetComponentInChildren<TMPro.TextMeshPro>().text = $"{cardSprite.name} ({value.ToString()})";
+
         // Apply texture
         card.GetComponentInChildren<SpriteRenderer>().sprite = cardSprite;
     }
