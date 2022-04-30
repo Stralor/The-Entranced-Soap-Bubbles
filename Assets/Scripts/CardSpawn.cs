@@ -9,7 +9,11 @@ public class CardSpawn : MonoBehaviour
     GameObject CardPrefab;
 
     [SerializeField]
+    List<Sprite> sprites;
+
+    [SerializeField]
     int InitialAmount = 10;
+
     [SerializeField]
     int MaxAmount = 50;
 
@@ -41,16 +45,26 @@ public class CardSpawn : MonoBehaviour
 
     public void AddCard (bool IsSpawnedInView = false) 
     {
-        if (IsSpawnedInView) 
+        if (sprites.Count == 0) 
         {
-            float randomX = Random.Range(-100f, 100f);
-            float randomY = Random.Range(-100f, 100f);
-            Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
-        } 
-        else 
-        {
-            float randomX = Random.Range(-100f, 100f);
-            Instantiate(CardPrefab, new Vector3(randomX, 70, 0), Quaternion.identity, transform);
+            Debug.Log("No card texture added.");
+            return;
         }
+
+        // Pick random card
+        int cardIndex = Random.Range(0, sprites.Count - 1);
+        if (cardIndex < 0) return;
+
+        var cardSprite = sprites[cardIndex];
+
+        // Spawn inside / outside viewport
+        float randomX = Random.Range(-100f, 100f);
+        float randomY = IsSpawnedInView ? Random.Range(-100f, 100f) : 70;
+
+        // Spawn
+        GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
+        
+        // Apply texture
+        card.GetComponentInChildren<SpriteRenderer>().sprite = cardSprite;
     }
 }
