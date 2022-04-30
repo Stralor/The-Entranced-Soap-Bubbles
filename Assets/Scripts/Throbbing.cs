@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Shapes;
+using UnityEngine.Serialization;
 
 public class Throbbing : MonoBehaviour
 {
-    public float minRadius;
-    public float maxRadius;
+    public float downRadiusFactor; 
+    public float upRadiusFactor;
     public float duration;
 
     private Disc disc;
@@ -27,7 +28,7 @@ public class Throbbing : MonoBehaviour
             .Append(DOTween.To(
                     () => disc.Radius,
                     x => disc.Radius = x,
-                    minRadius, duration)
+                    downRadiusFactor * baseRadius, duration)
                 .SetEase(Ease.OutElastic));
     }
 
@@ -39,7 +40,7 @@ public class Throbbing : MonoBehaviour
             .Append(DOTween.To(
                     () => disc.Radius,
                     x => disc.Radius = x,
-                    maxRadius, duration)
+                    upRadiusFactor * baseRadius, duration)
                 .SetEase(Ease.OutElastic))
             .AppendCallback(() => upThrobbing = false)
             .AppendCallback(() => Reset());
