@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{27001c97-bac4-4a3e-9a65-2108393da5d7}">
+		<property name="assetPath">
+			<value>EnchantedSoapBubble2.3.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>232.81877551020409</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8bca7bf2-31fe-4483-9a9b-bd52d4e99780}</destination>
+		</relationship>
+	</object>
+</objects>
