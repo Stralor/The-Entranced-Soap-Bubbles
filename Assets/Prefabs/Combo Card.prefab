@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3816474625137748351}
   - component: {fileID: 5659441765860474300}
   - component: {fileID: 1427779224722986487}
+  - component: {fileID: 8706481103501390152}
   m_Layer: 5
   m_Name: Combo Card
   m_TagString: Untagged
@@ -76,3 +77,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &8706481103501390152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 371501683504135790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8453b18f377a07345a381bd5f50b6df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

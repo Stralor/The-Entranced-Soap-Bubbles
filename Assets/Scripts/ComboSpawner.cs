@@ -31,7 +31,12 @@ public class ComboSpawner : MonoBehaviour
 
     public void ClearCombo()
     {
-        comboCards.ForEach(card => card.SetActive(false));
+        float delay = 0;
+        foreach (var card in comboCards)
+        {
+            delay += 0.1f;
+            card.GetComponent<ComboCard>().Clear(delay);
+        }
         comboCardPool.AddRange(comboCards);
         comboCards.Clear();
     }
