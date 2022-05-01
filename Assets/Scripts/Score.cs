@@ -26,6 +26,7 @@ public class Score : MonoBehaviour
             {
                 // Remove all combos
                 combos.Clear();
+                ComboSpawner.instance.ClearCombo();
             }
         }
 

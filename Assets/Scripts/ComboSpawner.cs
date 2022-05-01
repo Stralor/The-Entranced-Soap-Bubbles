@@ -31,7 +31,12 @@ public class ComboSpawner : MonoBehaviour
 
     public void ClearCombo()
     {
-        comboCards.ForEach(card => card.SetActive(false));
+        float delay = 0;
+        foreach (var card in comboCards)
+        {
+            delay += 0.1f;
+            card.GetComponent<ComboCard>().Clear(delay);
+        }
         comboCardPool.AddRange(comboCards);
         comboCards.Clear();
     }
@@ -61,9 +66,10 @@ public class ComboSpawner : MonoBehaviour
     {
         if (comboCards.Count == 0)
         {
-             return DOTween.Sequence()
-                 .Append(t.DOLocalMove(Vector3.up, claimDuration))
-                 .Insert(0, t.DOScale(Vector3.zero, claimDuration));
+            return DOTween.Sequence()
+                .Append(t.DOLocalMove(Vector3.up, claimDuration/2))
+                .Insert(0, t.DOScale(Vector3.zero, claimDuration/2))
+                .Insert(0, t.GetComponentInChildren<SpriteRenderer>().DOFade(0, claimDuration/2));
         }
 
         var rect = comboCards.Last().GetComponent<RectTransform>();
@@ -74,6 +80,8 @@ public class ComboSpawner : MonoBehaviour
         var averageZ = corners.Select(val => val.z).Average();
         var average = new Vector3(averageX, averageY, averageZ);
 
+        t.GetComponentInChildren<SpriteRenderer>().sortingOrder = 11;
+        
         return t.DOMove(average, claimDuration);
     }
     

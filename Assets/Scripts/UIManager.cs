@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
         {
             ScreenStartMenu.SetActive(false);
             ScreenInGame.SetActive(true);
+            ScreenGameOver.SetActive(false);
             CardSpawn.instance.SpawnSwarm();
         }
 
@@ -33,7 +34,15 @@ public class UIManager : MonoBehaviour
         {
             ScreenStartMenu.SetActive(true);
             ScreenInGame.SetActive(false);
+            ScreenGameOver.SetActive(false);
             CardSpawn.instance.RemoveCards();
         }
+    }
+
+    public void GameOver()
+    {
+        ScreenStartMenu.SetActive(false);
+        ScreenInGame.SetActive(false);
+        ScreenGameOver.SetActive(true);
     }
 }

@@ -6,6 +6,13 @@ public class GameTimer : MonoBehaviour
 {
     [SerializeField]
     private float time = 3f;
+
+    UIManager ui;
+
+    private void Start() 
+    {
+        ui = GameObject.Find("GameManager").GetComponent<UIManager>();   
+    }
     
     void Update()
     {
@@ -13,7 +20,11 @@ public class GameTimer : MonoBehaviour
         int timeClamp = time <= 0 ? 0 : timeRounded;  
         GetComponent<TMPro.TextMeshProUGUI>().text = $"TIME {timeClamp.ToString()}";
 
-        if (time <= 0) return;
+        if (time <= 0) {
+
+            ui.GameOver();   
+            return;
+        }
         time -= Time.deltaTime;
     }
 }
