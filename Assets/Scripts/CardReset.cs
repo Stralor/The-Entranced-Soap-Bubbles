@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CardReset : MonoBehaviour
 {
+
+    private Camera cam;
+
+    void Start()
+    {
+        cam = Camera.main; 
+    }
+
     void Update()
     {
         if (transform.position.y < -70) 
@@ -14,7 +22,9 @@ public class CardReset : MonoBehaviour
 
     public void Reset()
     {
-        transform.position = new Vector3(transform.position.x,  70, 0);
+        Vector3 worldPosition = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, cam.pixelHeight, 0));
+        float randomX = Random.Range(-worldPosition.x + 30, worldPosition.x);
+        transform.position = new Vector3(randomX, worldPosition.y + 10, 0);
         GetComponentInChildren<CardFlip>().Flip();
     }
 }

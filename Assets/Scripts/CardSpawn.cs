@@ -29,8 +29,12 @@ public class CardSpawn : MonoBehaviour
     float Timer = 0;
 
 
+    private Camera cam;
+
     void Start()
     {
+        cam = Camera.main; 
+
         for (int i=0; i < InitialAmount; i++) 
         {
             AddCard(true);
@@ -64,8 +68,9 @@ public class CardSpawn : MonoBehaviour
         Sprite cardSprite = cards[cardIndex];
 
         // Spawn inside / outside viewport
-        float randomX = Random.Range(-100f, 100f);
-        float randomY = IsSpawnedInView ? Random.Range(-100f, 100f) : 70;
+        Vector3 worldPosition = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, cam.pixelHeight, 0));
+        float randomX = Random.Range(-worldPosition.x + 30, worldPosition.x); // 30 is to avoid cards overlapping score etc.
+        float randomY = (IsSpawnedInView ? Random.Range(-worldPosition.y, worldPosition.y) : worldPosition.y) + 10;
 
         // Spawn
         GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
