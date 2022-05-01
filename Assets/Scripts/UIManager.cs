@@ -26,12 +26,21 @@ public class UIManager : MonoBehaviour
         {
             ScreenStartMenu.SetActive(false);
             ScreenInGame.SetActive(true);
+            ScreenGameOver.SetActive(false);
         }
 
         if (Input.anyKey && ScreenGameOver.active) 
         {
             ScreenStartMenu.SetActive(true);
             ScreenInGame.SetActive(false);
+            ScreenGameOver.SetActive(false);
         }
+    }
+
+    public void GameOver()
+    {
+        ScreenStartMenu.SetActive(false);
+        ScreenInGame.SetActive(false);
+        ScreenGameOver.SetActive(true);
     }
 }
