@@ -28,7 +28,9 @@ public class CardFlip : MonoBehaviour
         if (flipSequence != null && flipSequence.IsPlaying())
         {
             return flipSequence;
-        }
+        } 
+        
+        GetComponent<SpriteRenderer>().sortingOrder = 0;
         
         return DOTween.Sequence()
             .Append(transform.DOLocalRotate(new Vector3(0, 180, 0), duration)
