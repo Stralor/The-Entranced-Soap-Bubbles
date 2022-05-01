@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class CardSpawn : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class CardSpawn : MonoBehaviour
     [SerializeField]
     List<Sprite> cards;
 
+    [SerializeField]
+    List<Color> colors = new List<Color>();
+    
     [SerializeField]
     int MinScore = -1;
 
@@ -62,7 +66,7 @@ public class CardSpawn : MonoBehaviour
         }
 
         // Pick random card
-        int cardIndex = Random.Range(0, cards.Count - 1);
+        int cardIndex = Random.Range(0, cards.Count);
         if (cardIndex < 0) return;
 
         Sprite cardSprite = cards[cardIndex];
@@ -74,16 +78,19 @@ public class CardSpawn : MonoBehaviour
 
         // Spawn
         GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
+        card.GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-5, 5);
 
         // Meta
         int value = Random.Range(MinScore, MaxScore);
         card.GetComponent<CardMeta>().Name = cardSprite.name;
         card.GetComponent<CardMeta>().ScoreValue = value;
-        
+
         // Display text on card
-        card.GetComponentInChildren<TMPro.TextMeshPro>().text = $"{cardSprite.name} ({value.ToString()})";
+        card.GetComponentsInChildren<TMPro.TextMeshPro>().ToList().ForEach(text => text.text = $"{value.ToString()}");
 
         // Apply texture
-        card.GetComponentInChildren<SpriteRenderer>().sprite = cardSprite;
+        var spriteRenderer = card.GetComponentInChildren<SpriteRenderer>();
+        spriteRenderer.sprite = cardSprite;
+        spriteRenderer.color = colors[cardIndex];
     }
 }

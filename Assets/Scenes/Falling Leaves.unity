@@ -1439,6 +1439,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4e082a1f9496bb3428caa16c9950a984, type: 3}
   - {fileID: 21300000, guid: a37ee188fcfd6944a92244109b08d883, type: 3}
   - {fileID: 21300000, guid: a4293ba5e19ebb749b71ff28facf716e, type: 3}
+  colors:
+  - {r: 0.608527, g: 0.30795655, b: 0.6886792, a: 1}
+  - {r: 0.9056604, g: 0.7417618, b: 0.40498397, a: 1}
+  - {r: 0.335166, g: 0.6415094, b: 0.31107154, a: 1}
   MinScore: -1
   MaxScore: 10
   InitialAmount: 10
