@@ -1,19 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 public class CardSpawn : MonoBehaviour
 {
+    public static CardSpawn instance;
 
     [SerializeField]
     GameObject CardPrefab;
-
-    [SerializeField]
-    List<Sprite> cards;
-
-    [SerializeField]
-    List<Color> colors = new List<Color>();
+    
+    public List<Sprite> cards;
+    
+    public List<Color> colors = new List<Color>();
     
     [SerializeField]
     int MinScore = -1;
@@ -82,15 +83,24 @@ public class CardSpawn : MonoBehaviour
 
         // Meta
         int value = Random.Range(MinScore, MaxScore);
-        card.GetComponent<CardMeta>().Name = cardSprite.name;
-        card.GetComponent<CardMeta>().ScoreValue = value;
-
+        var cardMeta = card.GetComponent<CardMeta>();
+        cardMeta.Name = cardSprite.name;
+        cardMeta.ScoreValue = value;
+        cardMeta.sprite = cardSprite;
+        cardMeta.color = colors[cardIndex];
+        
         // Display text on card
         card.GetComponentsInChildren<TMPro.TextMeshPro>().ToList().ForEach(text => text.text = $"{value.ToString()}");
 
         // Apply texture
         var spriteRenderer = card.GetComponentInChildren<SpriteRenderer>();
-        spriteRenderer.sprite = cardSprite;
-        spriteRenderer.color = colors[cardIndex];
+        spriteRenderer.sprite = cardMeta.sprite;
+        spriteRenderer.color = cardMeta.color;
+
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
 }

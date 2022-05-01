@@ -33,7 +33,7 @@ public class CardInteract : MonoBehaviour {
             .Append(GetComponentInChildren<CardFlip>().Stop())
             .Append(sendTween)
             .AppendCallback(() => GetComponent<CardReset>().Reset())
-            .AppendCallback(() => ComboSpawner.instance.Spawn())
+            .AppendCallback(() => ComboSpawner.instance.Spawn(GetComponent<CardMeta>()))
             .AppendCallback(() => {
                 // Add score
                 Score.instance.AddScore(GetComponent<CardMeta>().Name, GetComponent<CardMeta>().ScoreValue);

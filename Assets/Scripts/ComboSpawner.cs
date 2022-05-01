@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DG.Tweening;
+using Mono.Cecil.Cil;
+using UnityEngine.UI;
 
 public class ComboSpawner : MonoBehaviour
 {
@@ -16,11 +18,15 @@ public class ComboSpawner : MonoBehaviour
     
     private static float claimDuration = 0.3f;
     
-    public void Spawn()
+    public void Spawn(CardMeta metaData)
     {
         var card = GetCard();
         
         comboCards.Add(card);
+        
+        var image = card.GetComponent<Image>();
+        image.sprite = metaData.sprite;
+        image.color = metaData.color;
     }
 
     public void ClearCombo()
