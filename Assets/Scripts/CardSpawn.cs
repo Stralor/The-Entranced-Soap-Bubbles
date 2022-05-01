@@ -74,7 +74,7 @@ public class CardSpawn : MonoBehaviour
 
         // Spawn inside / outside viewport
         Vector3 worldPosition = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, cam.pixelHeight, 0));
-        float randomX = Random.Range(-worldPosition.x + 30, worldPosition.x); // 30 is to avoid cards overlapping score etc.
+        float randomX = Random.Range(-worldPosition.x, worldPosition.x); 
         float randomY = (IsSpawnedInView ? Random.Range(-worldPosition.y, worldPosition.y) : worldPosition.y) + 10;
 
         // Spawn

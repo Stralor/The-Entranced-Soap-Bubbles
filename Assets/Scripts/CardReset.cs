@@ -23,7 +23,7 @@ public class CardReset : MonoBehaviour
     public void Reset()
     {
         Vector3 worldPosition = cam.ScreenToWorldPoint(new Vector3(cam.pixelWidth, cam.pixelHeight, 0));
-        float randomX = Random.Range(-worldPosition.x + 30, worldPosition.x);
+        float randomX = Random.Range(-worldPosition.x, worldPosition.x);
         transform.position = new Vector3(randomX, worldPosition.y + 10, 0);
         GetComponentInChildren<CardFlip>().Flip();
     }

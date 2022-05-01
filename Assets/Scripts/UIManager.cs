@@ -12,9 +12,13 @@ public class UIManager : MonoBehaviour
     private GameObject ScreenInGame;
     [SerializeField]
     private GameObject ScreenGameOver;
-    [SerializeField]
-    private GameObject ButtonStartGame;
 
+    void Start() 
+    {
+        ScreenStartMenu.SetActive(true);
+        ScreenInGame.SetActive(false);
+        ScreenGameOver.SetActive(false);
+    }
 
     void Update()
     {
