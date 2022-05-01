@@ -12,7 +12,7 @@ public class Score : MonoBehaviour
     public void AddScore(string cardName, int value) 
     {
         scoreValue += value;
-        GetComponent<TMPro.TextMeshProUGUI>().text = $"Score {scoreValue.ToString()}";
+        GetComponent<TMPro.TextMeshProUGUI>().text = $"SCORE {scoreValue.ToString()}";
     }
 
     void Awake()
