@@ -33,21 +33,40 @@ public class CardSpawn : MonoBehaviour
 
     float Timer = 0;
 
-
     private Camera cam;
+
+    private bool IsGameStarted = false;
+
+    private List<GameObject> spawnedCards = new List<GameObject>();
 
     void Start()
     {
         cam = Camera.main; 
+    }
 
+    public void SpawnSwarm() 
+    {
+        IsGameStarted = true;
         for (int i=0; i < InitialAmount; i++) 
         {
             AddCard(true);
         }
     }
 
+    public void RemoveCards() 
+    {
+        IsGameStarted = false;
+        foreach (GameObject spawnedCard in spawnedCards) 
+        {
+            Destroy(spawnedCard);
+        }
+        spawnedCards.Clear();
+    }
+
     void Update()
     {
+        if (!IsGameStarted) return;
+
         Timer += Time.deltaTime;
 
         if (Timer > Interval && transform.childCount < MaxAmount) 
@@ -79,6 +98,8 @@ public class CardSpawn : MonoBehaviour
 
         // Spawn
         GameObject card = Instantiate(CardPrefab, new Vector3(randomX, randomY, 0), Quaternion.identity, transform);
+        spawnedCards.Add(card);
+
         card.GetComponent<Rigidbody2D>().angularVelocity = Random.Range(-5, 5);
 
         // Meta

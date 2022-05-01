@@ -26,12 +26,14 @@ public class UIManager : MonoBehaviour
         {
             ScreenStartMenu.SetActive(false);
             ScreenInGame.SetActive(true);
+            CardSpawn.instance.SpawnSwarm();
         }
 
         if (Input.anyKey && ScreenGameOver.active) 
         {
             ScreenStartMenu.SetActive(true);
             ScreenInGame.SetActive(false);
+            CardSpawn.instance.RemoveCards();
         }
     }
 }
