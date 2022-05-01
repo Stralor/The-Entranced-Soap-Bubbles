@@ -11,18 +11,18 @@ public class Timer : MonoBehaviour
 
 	private Disc disc;
 	private float angStart;
+	private Sequence lifeTimer;
+	
 	
 	void Start()
 	{
 		disc = GetComponent<Disc>();
 		angStart = disc.AngRadiansStart;
-		
-		StartTimer();
 	}
 
 	void StartTimer()
 	{
-		var lifeTimer = DOTween.Sequence()
+		lifeTimer = DOTween.Sequence()
 			.AppendInterval(lifetime/10)
 			.Append(DOTween.To(
 					() => disc.AngRadiansEnd,
@@ -36,6 +36,8 @@ public class Timer : MonoBehaviour
 
 	public void Reset()
 	{
+		lifeTimer?.Kill();
+		
 		disc.AngRadiansEnd = disc.AngRadiansStart;
 		
 		StartTimer();
