@@ -13,16 +13,16 @@ public class Score : MonoBehaviour
 
     public void AddScore(string cardName, int value) 
     {
-        // Compare current card to the one added latest
-        if (combos.Count > 0) 
+        if (combos.Count > 0)
         {
-            CardData lastCombo = combos[combos.Count - 1];
-            if (lastCombo.CardName == cardName) 
+            // Compare current card to the one added latest
+            if (IsValidForCombo(cardName))
             {
+                CardData lastCombo = combos[combos.Count - 1];
                 // Change this calculation to whatever
-                scoreValue += lastCombo.CardValue * value; 
+                scoreValue += lastCombo.CardValue * value;
             }
-            else 
+            else
             {
                 // Remove all combos
                 combos.Clear();
@@ -46,6 +46,24 @@ public class Score : MonoBehaviour
         });
     }
 
+    public bool IsValidForCombo(string cardName)
+    {
+        if (combos.Count > 0) 
+        {
+            CardData lastCombo = combos[combos.Count - 1];
+            if (lastCombo.CardName == cardName)
+            {
+                return true;// Change this calculation to whatever
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
     void Awake()
     {
         instance = this;
