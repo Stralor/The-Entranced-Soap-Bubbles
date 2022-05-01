@@ -27,8 +27,22 @@ public class CardInteract : MonoBehaviour {
 
     void OnMouseUpAsButton()
     {
-        var sendTween = ComboSpawner.instance.SendCardToLastOfCombo(transform);
+        var meta = GetComponent<CardMeta>();
         
+        Tween sendTween;
+        
+        if (Score.instance.IsValidForCombo(meta.Name))
+        {
+            sendTween = ComboSpawner.instance.SendCardToLastOfCombo(transform);
+        }
+        else
+        {
+            sendTween = DOTween.Sequence()
+                .Append(transform.DOLocalMove(Vector3.up, 0.1f))
+                .Insert(0, transform.DOScale(Vector3.zero, 0.1f))
+                .Insert(0, transform.GetComponentInChildren<SpriteRenderer>().DOFade(0, 0.1f));
+        }
+
         DOTween.Sequence()
             .Append(GetComponentInChildren<CardFlip>().Stop())
             .Append(sendTween)
@@ -36,7 +50,7 @@ public class CardInteract : MonoBehaviour {
             .AppendCallback(() => ComboSpawner.instance.Spawn(GetComponent<CardMeta>()))
             .AppendCallback(() => {
                 // Add score
-                Score.instance.AddScore(GetComponent<CardMeta>().Name, GetComponent<CardMeta>().ScoreValue);
+                Score.instance.AddScore(meta.Name, GetComponent<CardMeta>().ScoreValue);
             });
     }
 
