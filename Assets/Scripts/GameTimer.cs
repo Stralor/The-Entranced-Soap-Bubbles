@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,11 @@ public class GameTimer : MonoBehaviour
         timeLeft = initialTime;
     }
 
+    public void AddTime(float comboTime)
+    {
+        timeLeft += comboTime;
+    }
+    
     void Update()
     {
         int timeRounded = (int)System.Math.Round(timeLeft, 0);
@@ -27,15 +33,16 @@ public class GameTimer : MonoBehaviour
 
         if (timeLeft <= 0) 
         {
-            if (IsTimerCounting) 
+            if (IsTimerCounting && !Score.instance.HasCombo) 
             {
                 IsTimerCounting = false;
                 UIManager.instance.GameOver();
             }
-            return;
         }
-
-        timeLeft -= Time.deltaTime;
+        else
+        {
+            timeLeft -= Time.deltaTime;
+        }
     }
 
     void Awake () 

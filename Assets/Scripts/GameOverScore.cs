@@ -8,6 +8,6 @@ public class GameOverScore : MonoBehaviour
     void Update()
     {
         int score = Score.instance.GetScore();
-        GetComponent<TMPro.TextMeshProUGUI>().text = $"Your score ${score}";
+        GetComponent<TMPro.TextMeshProUGUI>().text = $"Your score {score}";
     }
 }

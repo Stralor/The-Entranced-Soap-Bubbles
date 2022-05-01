@@ -7,6 +7,8 @@ public class Score : MonoBehaviour
 {
     public static Score instance;
 
+    public Timer comboTimer;
+
     private int scoreValue = 0;
 
     private List<CardData> combos = new List<CardData>();
@@ -21,6 +23,8 @@ public class Score : MonoBehaviour
         scoreValue = 0;
     }
 
+    public bool HasCombo => combos.Count > 0;
+    
     public void AddScore(string cardName, int value) 
     {
         if (combos.Count > 0)
@@ -31,12 +35,11 @@ public class Score : MonoBehaviour
                 CardData lastCombo = combos[combos.Count - 1];
                 // Change this calculation to whatever
                 scoreValue += lastCombo.CardValue * value;
+                comboTimer.Reset();
             }
             else
             {
-                // Remove all combos
-                combos.Clear();
-                ComboSpawner.instance.ClearCombo();
+                ClearCombo();
             }
         }
 
@@ -54,6 +57,17 @@ public class Score : MonoBehaviour
             CardName = cardName,
             CardValue = value
         });
+    }
+
+    public void ClearCombo()
+    {
+        var timeToAdd = Mathf.Max(combos.Count - 2, 0);
+        
+        GameTimer.instance.AddTime(timeToAdd);
+        
+        // Remove all combos
+        combos.Clear();
+        ComboSpawner.instance.ClearCombo();
     }
 
     public bool IsValidForCombo(string cardName)
