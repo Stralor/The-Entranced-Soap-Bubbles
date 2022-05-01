@@ -6,6 +6,8 @@ using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     [SerializeField]
     private GameObject ScreenStartMenu;
     [SerializeField]
@@ -22,15 +24,15 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.anyKey && ScreenStartMenu.active)
+        if (Input.anyKeyDown && ScreenStartMenu.active)
         {
             ScreenStartMenu.SetActive(false);
             ScreenInGame.SetActive(true);
             ScreenGameOver.SetActive(false);
             CardSpawn.instance.SpawnSwarm();
+            GameTimer.instance.StartTimer();
         }
-
-        if (Input.anyKey && ScreenGameOver.active) 
+        else if (Input.anyKeyDown && ScreenGameOver.active) 
         {
             ScreenStartMenu.SetActive(true);
             ScreenInGame.SetActive(false);
@@ -44,5 +46,10 @@ public class UIManager : MonoBehaviour
         ScreenStartMenu.SetActive(false);
         ScreenInGame.SetActive(false);
         ScreenGameOver.SetActive(true);
+    }
+
+    void Awake () 
+    {
+        instance = this;
     }
 }

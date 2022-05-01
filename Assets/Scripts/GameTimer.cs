@@ -4,27 +4,42 @@ using UnityEngine;
 
 public class GameTimer : MonoBehaviour
 {
+    public static GameTimer instance;
+
     [SerializeField]
-    private float time = 3f;
+    private float initialTime = 3f;
 
-    UIManager ui;
+    private float timeLeft = 0;
+    private bool IsTimerCounting;
 
-    private void Start() 
+
+    public void StartTimer() 
     {
-        ui = GameObject.Find("GameManager").GetComponent<UIManager>();   
+        IsTimerCounting = true;
+        timeLeft = initialTime;
     }
-    
+
     void Update()
     {
-        int timeRounded = (int)System.Math.Round(time, 0);
-        int timeClamp = time <= 0 ? 0 : timeRounded;  
-        GetComponent<TMPro.TextMeshProUGUI>().text = $"TIME {timeClamp.ToString()}";
+        int timeRounded = (int)System.Math.Round(timeLeft, 0);
+        int timeClamp = timeLeft <= 0 ? 0 : timeRounded;  
+        GetComponent<TMPro.TextMeshProUGUI>().text = $"TIME {timeClamp.ToString()}"; 
 
-        if (time <= 0) {
-
-            ui.GameOver();   
+        if (timeLeft <= 0) 
+        {
+            if (IsTimerCounting) 
+            {
+                IsTimerCounting = false;
+                UIManager.instance.GameOver();
+            }
             return;
         }
-        time -= Time.deltaTime;
+
+        timeLeft -= Time.deltaTime;
+    }
+
+    void Awake () 
+    {
+        instance = this;
     }
 }
