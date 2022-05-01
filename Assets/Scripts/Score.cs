@@ -11,6 +11,16 @@ public class Score : MonoBehaviour
 
     private List<CardData> combos = new List<CardData>();
 
+    public int GetScore () 
+    {
+        return scoreValue;
+    }
+
+    public void ResetScore() 
+    {
+        scoreValue = 0;
+    }
+
     public void AddScore(string cardName, int value) 
     {
         if (combos.Count > 0)

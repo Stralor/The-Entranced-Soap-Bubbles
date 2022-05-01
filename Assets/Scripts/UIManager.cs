@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
             ScreenGameOver.SetActive(false);
             CardSpawn.instance.SpawnSwarm();
             GameTimer.instance.StartTimer();
+            Score.instance.ResetScore();
         }
         else if (Input.anyKeyDown && ScreenGameOver.active) 
         {
